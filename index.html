@@ -6,11 +6,25 @@
     <title>Salon Booking | 預約您的美麗</title>
     <style>
         :root { --main-gold: #c5a059; --soft-bg: #faf7f2; }
-        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; background-color: var(--soft-bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; background-color: var(--soft-bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px 0; }
         .booking-box { background: #fff; width: 90%; max-width: 450px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow: hidden; }
         .header-img { background: var(--main-gold); color: white; padding: 30px; text-align: center; }
         .header-img h2 { margin: 0; letter-spacing: 2px; }
         .form-content { padding: 30px; }
+        
+        /* 公告欄樣式 */
+        .notice-bar { 
+            background: #fff4e6; 
+            border: 1px dashed #c5a059; 
+            color: #c5a059; 
+            padding: 12px; 
+            margin-bottom: 25px; 
+            border-radius: 10px; 
+            font-size: 14px; 
+            text-align: center;
+            line-height: 1.5;
+        }
+
         .field { margin-bottom: 20px; }
         label { display: block; font-size: 14px; color: #666; margin-bottom: 8px; font-weight: 500; }
         input, select { width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 16px; transition: 0.3s; box-sizing: border-box; }
@@ -29,6 +43,11 @@
     </div>
     
     <div class="form-content">
+        <div class="notice-bar">
+            📌 <b>目前客滿時段：</b><br>
+            12/30 (10:00)、1/1 (全日)、1/1 (12:00)
+        </div>
+
         <form id="bookingForm">
             <div class="field">
                 <label>顧客姓名</label>
@@ -56,9 +75,7 @@
                     <option value="19:00 - 21:00">19:00 - 21:00</option>
                 </select>
             </div>
-            <button type="submit" class="btn-line">
-                用 LINE 發送預約
-            </button>
+            <button type="submit" class="btn-line">用 LINE 發送預約</button>
             <div class="tip">※ 點擊後請務必在 LINE 按下「傳送」按鈕</div>
         </form>
     </div>
@@ -77,13 +94,8 @@
         const date = document.getElementById('date').value;
         const time = document.getElementById('time').value;
 
-        // 替換成您的官方帳號 ID，務必包含 @
         const lineID = "@415nabyz"; 
-
-        // 組織訊息內容
         const message = `你好！我要預約：\n━━━━━━━━━━\n👤 姓名：${name}\n✨ 項目：${service}\n📅 日期：${date}\n⏰ 時段：${time}\n━━━━━━━━━━\n請幫我確認是否有空檔，謝謝！`;
-
-        // 跳轉至 LINE 官方帳號對話視窗並帶入訊息
         const lineUrl = `https://line.me/R/oaMessage/${lineID}/?${encodeURIComponent(message)}`;
         
         window.location.href = lineUrl;
